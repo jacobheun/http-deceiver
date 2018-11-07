@@ -31,9 +31,9 @@ describe('HTTP Deceiver', function () {
     server.emit('connection', socket)
 
     server.on('request', function (req, res) {
-      assert.equal(req.method, 'PUT')
-      assert.equal(req.url, '/hello')
-      assert.deepEqual(req.headers, { a: 'b' })
+      assert.strictEqual(req.method, 'PUT')
+      assert.strictEqual(req.url, '/hello')
+      assert.deepStrictEqual(req.headers, { a: 'b' })
 
       done()
     })
@@ -57,8 +57,8 @@ describe('HTTP Deceiver', function () {
       path: '/ok',
       agent: agent
     }, function (res) {
-      assert.equal(res.statusCode, 421)
-      assert.deepEqual(res.headers, { a: 'b' })
+      assert.strictEqual(res.statusCode, 421)
+      assert.deepStrictEqual(res.headers, { a: 'b' })
 
       done()
     })
@@ -79,16 +79,16 @@ describe('HTTP Deceiver', function () {
     server.emit('connection', socket)
 
     server.on('request', function (req, res) {
-      assert.equal(req.method, 'PUT')
-      assert.equal(req.url, '/hello')
-      assert.deepEqual(req.headers, { a: 'b' })
+      assert.strictEqual(req.method, 'PUT')
+      assert.strictEqual(req.url, '/hello')
+      assert.deepStrictEqual(req.headers, { a: 'b' })
 
       var actual = ''
       req.on('data', function (chunk) {
         actual += chunk
       })
       req.once('end', function () {
-        assert.equal(actual, 'hello world')
+        assert.strictEqual(actual, 'hello world')
         done()
       })
     })
@@ -129,7 +129,7 @@ describe('HTTP Deceiver', function () {
         actual += chunk
       })
       req.once('end', function () {
-        assert.equal(actual, 'hello world')
+        assert.strictEqual(actual, 'hello world')
 
         if (req.url === '/first') {
           secondRequest()
@@ -156,8 +156,8 @@ describe('HTTP Deceiver', function () {
     server.emit('connection', socket)
 
     server.on('connect', function (req, socket, bodyHead) {
-      assert.equal(req.method, 'CONNECT')
-      assert.equal(req.url, '/hello')
+      assert.strictEqual(req.method, 'CONNECT')
+      assert.strictEqual(req.url, '/hello')
 
       done()
     })
@@ -175,11 +175,11 @@ describe('HTTP Deceiver', function () {
     server.emit('connection', socket)
 
     server.on('upgrade', function (req, socket, bodyHead) {
-      assert.equal(req.method, 'POST')
-      assert.equal(req.url, '/hello')
+      assert.strictEqual(req.method, 'POST')
+      assert.strictEqual(req.url, '/hello')
 
       socket.on('data', function (chunk) {
-        assert.equal(chunk + '', 'hm')
+        assert.strictEqual(chunk + '', 'hm')
         done()
       })
     })
@@ -212,7 +212,7 @@ describe('HTTP Deceiver', function () {
       assert(false)
     })
     client.on('upgrade', function (res, socket) {
-      assert.equal(res.statusCode, 421)
+      assert.strictEqual(res.statusCode, 421)
       done()
     })
 
