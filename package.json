@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/spdy-http2/http-deceiver#readme",
   "devDependencies": {
-    "handle-thing": "^1.2.5",
+    "handle-thing": "github:jacobheun/handle-thing#fix/updates",
     "istanbul": "^0.4.5",
     "mocha": "^5.2.0",
     "pre-commit": "^1.2.2",

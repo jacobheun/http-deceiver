@@ -19,10 +19,6 @@ describe('HTTP Deceiver', function () {
     handle = thing.create(pair.other)
     socket = new net.Socket({ handle: handle })
 
-    // For v0.8
-    socket.readable = true
-    socket.writable = true
-
     deceiver = httpDeceiver.create(socket)
   })
 
@@ -113,10 +109,6 @@ describe('HTTP Deceiver', function () {
       pair = streamPair.create()
       handle = thing.create(pair.other)
       socket = new net.Socket({ handle: handle })
-
-      // For v0.8
-      socket.readable = true
-      socket.writable = true
 
       server.emit('connection', socket)
 
